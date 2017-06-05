@@ -1,0 +1,23 @@
+<div class="landing-hero-container p-xl" style="{{containerStyle}}">
+    <div class="container">
+       <div class="row">
+           <div class="text-center m-t-lg col-xs-12">
+               <div class="preprint-brand"></div>
+               {{#if layout.settings.useLogo}}
+                    <div class="coll-hero-logo" style="{{logoStyle}}" aria-role="img" aria-label="{{branding.logo.label}}"></div>
+               {{else}}
+                    <h2>{{layout.title}}</h2>
+               {{/if}}
+               <p class="lead">{{layout.tagline}}</p>
+
+               <div class="input-group input-group-lg m-b-md">
+                   {{input value=searchQuery placeholder="Search preprints..." class="form-control"}}
+                   <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" {{action 'search'}}>Search</button>
+                   </span>
+               </div>
+               {{#link-to "collection.add" class="btn btn-success btn-lg"}}Add to Collection {{/link-to}}
+           </div>
+       </div>
+   </div>
+</div>
