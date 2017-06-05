@@ -1,0 +1,44 @@
+{{#if cardView}}
+    <div class="coll-item-wrapper">
+        {{#if organizeMode}}
+            {{#unless (eq item.type 'group')}}
+                <div class="coll-item-organize pointer {{if item.selected 'item-selected'}}" {{action 'markSelected' item}}>
+                    <i class="fa fa-check"></i>
+                    <p>{{if item.selected 'Click to unselect' 'Click to select'}}</p>
+                </div>
+            {{/unless}}
+        {{/if}}
+        <div class="coll-item coll-item-type-{{item.type}} {{if (eq item.type 'group') 'coll-item-isgroup'}}">
+            {{#if (eq item.type 'group')}}
+                <h4>{{#link-to 'collection.group' item.id}}{{item.title}}{{/link-to}}</h4>
+            {{else if (eq parent 'group')}}
+                <h4>{{#link-to 'collection.group.item' item.id}}{{item.title}}{{/link-to}}</h4>
+            {{else}}
+                <h4>{{#link-to 'collection.item' item.id}}{{item.title}}{{/link-to}}</h4>
+            {{/if}}
+            <p> Type: {{item.type}} </p>
+            {{#if item.status}}
+                <p> Status: {{item.status}} </p>
+            {{/if}}
+        </div>
+    </div>
+{{else}}
+    <td>
+        {{#if (eq item.type 'group')}}
+            <p>{{#link-to 'collection.group' item.id}}{{item.title}}{{/link-to}}</p>
+        {{else if (eq parent 'group')}}
+            <p>{{#link-to 'collection.group.item' item.id}}{{item.title}}{{/link-to}}</p>
+        {{else}}
+            <p>{{#link-to 'collection.item' item.id}}{{item.title}}{{/link-to}}</p>
+        {{/if}}
+    </td>
+    <td>{{item.type}}</td>
+    <td>{{item.status}}</td>
+    <td>
+        {{#if organizeMode}}
+            {{#unless (eq item.type 'group')}}
+                {{input checked=item.selected type="checkbox" click=(action 'markSelected' item)}}
+            {{/unless}}
+        {{/if}}
+    </td>
+{{/if}}

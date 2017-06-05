@@ -1,0 +1,26 @@
+{{#if session.isAuthenticated}}
+    <a href="#" class="dropdown-toggle nav-user-dropdown" data-toggle="dropdown" role="button" aria-expanded="false">
+        <span class="osf-gravatar">
+            <img src="{{gravatarUrl}}" alt="User gravatar">
+        </span> {{userName}}
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="{{host}}profile/"><i class="fa fa-user fa-lg p-r-xs"></i> My Profile</a>
+        </li>
+        <li>
+            <a href="{{host}}support/"><i class="fa fa-life-ring fa-lg p-r-xs"></i> Support</a>
+        </li>
+        <li>
+            <a href="{{host}}settings/"><i class="fa fa-cog fa-lg p-r-xs"></i> Settings</a>
+        </li>
+        <li class="pointer">
+            <a onclick={{action 'logout'}}><i class="fa fa-sign-out fa-lg p-r-xs"></i> Log out</a>
+        </li>
+    </ul>
+{{else}}
+    <div class="col-sm-12">
+        <a {{action loginAction}} class="btn btn-info btn-top-login m-r-xs">Sign in with OSF</a>
+    </div>
+{{/if}}

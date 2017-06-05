@@ -1,0 +1,60 @@
+<div class="coll-add-layer p-xl">
+    <div class="container">
+    {{# if editMode}}
+        <div class="form">
+            <div class="form-group">
+                <label for="collectionTitle">Title</label>
+                {{input class="form-control" value=modelCache.title placeholder="Enter title" id="collectionTitle"}}
+            </div>
+            <div class="form-group">
+                <label for="collectionDescription">Description</label>
+                {{textarea class="form-control" value=modelCache.description id="collectionDescription"}}
+            </div>
+            <div class="text-right">
+                <button class="btn btn-default" {{action 'cancelEdit'}}>Cancel</button>
+                <button class="btn btn-success" {{action 'saveEdit'}}>Save</button>
+            </div>
+        </div>
+    {{else}}
+        <h2> <span> {{#link-to 'collection.browse'}} <i class="fa fa-angle-left"></i>{{/link-to}}</span> {{model.title}}</h2>
+        <div class="m-b-md">
+            {{#if model.description}}
+                {{model.description}}
+            {{else}}
+                <span class="text-muted" {{action 'showEdit'}}>Add description </span>
+            {{/if}}
+        </div>
+        <p>Date created: {{model.dateCreated}} </p>
+        <p>Date updated : {{model.dateUpdated}}</p>
+        <div class="pull-right">
+            <button class="btn btn-danger btn-collection" {{action toggleProperty 'showDeleteGroupConfirmation'}}> <i class="fa fa-times"></i> Delete </button>
+            <button class="btn btn-info btn-collection" {{action 'showEdit'}}> <i class="fa fa-pencil"></i> Edit</button>
+        </div>
+    {{/if}}
+
+    </div>
+</div>
+
+{{#if showDeleteGroupConfirmation}}
+<div class="modal fade in" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" {{action toggleProperty 'showDeleteGroupConfirmation'}}><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete this group?</h4>
+      </div>
+      <div class="modal-body">
+        <p> Are you sure you want to delete this group? </p>
+        <p>You can delete the group and keep items. This option will put the items back into the collection.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" {{action toggleProperty 'showDeleteGroupConfirmation'}}>Close</button>
+        <button type="button" class="btn btn-warning" {{action 'deletePartial'}}>Delete Group and keep items</button>
+        <button type="button" class="btn btn-danger" {{action 'deleteGroup'}}>Delete all</button>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal-backdrop fade in"></div>
+{{/if}}

@@ -1,0 +1,62 @@
+<div class="coll-add-item break-word">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">{{input class="form-control" value=searchFilter placeholder="Search" enter="enterPressSearch"}}<button class="btn btn-success m-t-sm {{unless searchFilter 'disabled'}}" {{action 'searchNode'}}>Search {{displayItemType}}</button></div>
+            <div class="col-sm-4">{{input class="form-control" value=searchGuid placeholder="Enter guid" enter="enterPressGuid"}} <button class="btn btn-success m-t-sm {{unless searchGuid 'disabled'}}" {{action 'findNode'}}>Preview</button></div>
+        </div>
+
+        {{#if loadingItem}}
+            <div class="p-lg text-center">
+                <div class="loader">
+                    <div class="loader-inner ball-pulse ball-pulse-dark">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                </div>
+             </div>
+        {{/if}}
+
+        {{#if showResults}}
+            {{#if (gt results.length 0)}}
+                <p class="text-muted m-t-sm"> Showing at most 10 items. Narrow search for better results. </p>
+                {{#each results as |result|}}
+                    <div class="p-xs coll-search-result">{{result.title}} <button class="btn btn-link" {{action 'addItem' result}}><i class="fa fa-plus"></i> Add Item </button></div>
+                {{/each}}
+            {{else}}
+                <p class="text-muted m-t-sm"> We couldn't find any {{displayItemType}} with this search. Please try another search. </p>
+            {{/if}}
+        {{/if}}
+
+        {{#if findItemError}}
+            <div class="p-lg text-center text-danger">
+                <p>
+                    {{#each findItemError as |error|}}
+                        {{error.detail}}
+                    {{/each}}
+                </p>
+                <p> Please try again or try another {{displayItemType}} ID </p>
+             </div>
+        {{/if}}
+
+        {{#if showAddItemDetails}}
+        <div class="coll-find-details p-md">
+            <h4>Title </h4>
+            <p class="m-t-sm">{{newItemNode.title}}</p>
+
+            <h4>Description </h4>
+            <p class="m-t-sm">{{newItemNode.description}}</p>
+
+            <h4>Type </h4>
+            <p class="m-t-sm">{{newItemNode.type}}</p>
+
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <button class="btn btn-success" {{action 'addItem'}}>Add Item </button>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+    </div>
+</div>

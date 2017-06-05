@@ -1,0 +1,12 @@
+<div class="landing-list-container p-xl">
+    <div class="container">
+        <h2> {{layout.title}}</h2>
+        <div class="subject row m-b-sm">
+            {{#each data as |subject|}}
+                <div class="col-xs-12 col-sm-6 subject-item hint--bottom hint--large" aria-label="{{subject.label}}">
+                    <a href="{{subject.link}}" class="btn btn-primary p-sm ember-view" style="{{buttonStyle}}">{{subject.name}}</a>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
