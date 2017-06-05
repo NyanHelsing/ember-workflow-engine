@@ -1,3 +1,3 @@
-import file-uploader from 'ember-workflow-engine';
+import fileUploader from 'ember-workflow-engine/components/file-uploader';
 
-export default file-uploader;
+export default fileUploader;
