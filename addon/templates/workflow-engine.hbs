@@ -1,0 +1,23 @@
+<div class="coll-add-choice">
+    <div class="container">
+        <h2>Add A Preprint</h2>
+        {{#if (eq model.settings.collectionType 'Website')}}
+            {{add-website model=model transition=(action "transition")}}
+        {{else}}
+            {{#each sections as |section|}}
+
+                <div class="add-panel m-t-lg p-md">
+
+                    <h3>{{section}}</h3>
+                    {{#each widgets as |widget|}}
+                        {{#if (eq widget.section section)}}
+                            {{component widget.widget_component saveParameter=(action saveParameter state widget.output)}}
+                        {{/if}}
+                    {{/each}}
+
+                </div>
+
+            {{/each}}
+        {{/if}}
+    </div>
+</div>
