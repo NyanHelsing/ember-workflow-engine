@@ -1,5 +1,1 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-
-});
+export { default } from 'ember-workflow-engine/components/file-uploader/component';
