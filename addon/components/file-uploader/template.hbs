@@ -1,2 +1,48 @@
-HELLO
+<style>
+    .submission-upload {
+        position: relative;
+        overflow: hidden;
+        border: 2px dashed #ddd;
+        border-radius: 3px;
+        padding: 10px;
+        background-color: #f5f5f5;
+    }
+    .submission-upload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    .submission-upload .directions {
+        position: relative;
+        text-align: center;
+        margin: 0 auto;
+        color: #666;
+    }
+</style>
+
+{{#if (not isOpen)}}
+    Filename: {{filename}}
+{{/if}}
+
+{{#preprint-form-body}}
+    {{#if isOpen}}
+        <div class='submission-upload'>
+          <div class='directions'>
+              Select a preprint file to upload
+          </div>
+          <input
+              class='upload'
+              type="file"
+              onchange={{action "uploadFile" value=target}}
+          >
+        </div>
+    {{/if}}
+{{/preprint-form-body}}
 {{yield}}
