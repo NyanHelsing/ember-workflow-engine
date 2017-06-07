@@ -1,0 +1,29 @@
+{{! Turn off rule that fails due to whitespace control bug.
+    Can remove when this PR merged: https://github.com/rwjblue/ember-template-lint/pull/98 }}
+<!-- template-lint block-indentation=false -->
+
+<div class="section-header">
+    {{displayName}}
+{{!--{{#if (eq name 'location_of_preprint')}}
+        <span class='text-muted'> {{t (concat "components.preprint-form-header.name." name)}} </span>
+    {{else}}
+        {{t (concat "components.preprint-form-header.name." name)}}
+    {{/if}}--}}
+</div>
+
+<div class="preprint-section-status pull-right">
+    {{!--{{#if (and disciplineSaveState (eq name 'Discipline'))}}
+        <span class="text-success text-smaller m-r-md"> Changes Saved</span>
+    {{/if}}--}}
+    {{#if showValidationIndicator}}
+        {{fa-icon 'fa-floppy-o'}}
+    {{/if}}
+</div>
+
+{{#if (not isOpen)}}
+    <div class="m-t-md preprint-header-preview">
+        {{#if (and (is-section-editable name) (or editMode (or (not showValidationIndicator) isValidationActive)))}}
+            <i class="text-smaller m-t-md">{{t "components.preprint-form-header.click_edit"}}</i>
+        {{/if}}
+    </div>
+{{/if}}

@@ -1,0 +1,21 @@
+<style>
+    .submission-text-field {
+        margin-top: 10px;
+    }
+</style>
+
+{{#if (not isOpen)}}
+
+    {{valueName}}: {{textFieldValue}}
+
+{{/if}}
+
+{{#preprint-form-body}}
+    {{#if isOpen}}
+        <div class='submission-text-field'>
+            <label>{{description}}</label>
+            {{input value=textFieldValue class='form-control ' }}
+        </div>
+    {{/if}}
+{{/preprint-form-body}}
+{{yield}}

@@ -1,0 +1,82 @@
+{{#preprint-form-body}}
+    {{#if isOpen}}
+            <div class='row m-b-md'>
+              <div class='col-xs-12'>
+                  {{license-picker currentValues=basicsLicense showCategories=false editLicense=(action 'editLicense') allowDismiss=false autosave=true showBorder=false pressSubmit=(action 'saveBasics')}}
+                  <br>
+                  <div class="row">
+                      <div class='col-xs-12'>
+                          <label> {{t "submit.body.basics.license.apply_license_title"}} </label>
+                          {{#if (or (not newNode) editMode)}}
+                              <p>{{t "submit.body.basics.license.apply_license_text"}}</p>
+                          {{/if}}
+                          <span style="margin: 5px">
+                              <input onchange={{action 'applyLicenseToggle' true}} type="radio" checked={{applyLicense}}> Yes
+                              <input onchange={{action 'applyLicenseToggle' false}} type="radio" checked={{not applyLicense}}> No
+                          </span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                  <div>
+                      <label>{{t "submit.body.basics.doi.label"}}:</label>
+                      <form onchange={{action 'stripDOI'}} onsubmit={{action 'preventDefault'}}>
+                          {{validated-input model=this valuePath='basicsDOI' placeholder=(t "global.doi") value=basicsDOI pressSubmit=(action 'saveBasics')}}
+                      </form>
+                  </div>
+                  <div class="clearfix">
+                      <label>{{t "submit.body.basics.keywords.label"}}:</label>
+                      <p class="text-smaller">{{t "submit.body.basics.keywords.paragraph"}}</p>
+                      {{tags-widget addATag=(action 'addTag') removeATag=(action 'removeTag') tags=basicsTags}}
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <label>
+                      <span class="required">{{t "global.abstract"}}:</span>
+                  </label>
+                  <form>
+                      {{validated-input model=this valuePath='basicsAbstract' placeholder=(t "submit.body.basics.abstract.placeholder") value=basicsAbstract large=true}}
+                  </form>
+              </div>
+          </div>
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="pull-right">
+                      <button {{action 'discardBasics'}} class="btn btn-default" {{action 'discardBasics'}} >{{t "global.discard"}}</button>
+                      <button {{action 'saveBasics'}} class="btn btn-primary" disabled={{unless basicsValid true}} >{{t "submit.body.save_continue"}}</button>
+                  </div>
+              </div>
+          </div>
+    {{/if}}
+{{/preprint-form-body}}
+
+{{#if (not isOpen)}}
+    {{#if basicsAbstract}}
+    <div class='row m-b-md'>
+        <div class='col-xs-12'>
+            <b>Abstract:</b>
+            <p>{{basicsAbstract}}</p>
+            <b>License:</b>
+            <p>
+                {{#if basicsLicense}}
+                    <span>{{basicsLicense.licenseType.name}}</span>
+                {{else}}
+                    <i>Not provided</i>
+                {{/if}}
+            </p>
+            <b>DOI:</b>
+            <p>{{#if basicsDOI}}{{basicsDOI}}{{else}}<i>Not provided</i>{{/if}}</p>
+            <b>Tags:</b>
+            <p>{{#if basicsTags}}
+                    {{#each basicsTags as |tag|}} <span class="subject-preview">{{tag}}</span>{{/each}}
+                {{else}}
+                    <i>Not provided</i>
+                {{/if}}
+            </p>
+        </div>
+    </div>
+{{/if}}
+{{/if}}
