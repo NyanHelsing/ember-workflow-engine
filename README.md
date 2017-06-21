@@ -1,12 +1,12 @@
-# ember-workflow-engine
+# Ember Workflow Engine
 
-This README outlines the details of collaborating on this Ember addon.
+Create workflows and wizards befined in data and run them in the client.
 
 ## Installation
 
 * `git clone <repository-url>` this repository
 * `cd ember-workflow-engine`
-* `npm install`
+* `yarn install`
 * `bower install`
 
 ## Running
